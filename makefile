@@ -11,5 +11,8 @@ benchmark:
 pprof:
 	go tool pprof cpu.out
 
+doc:
+	godoc --http :6060
+
 clean:
 	-rm cpu.out click.test demo

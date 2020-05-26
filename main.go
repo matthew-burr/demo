@@ -1,4 +1,4 @@
-// Composing structures
+// Package demo illustrates key Go concepts.
 package main
 
 import (
