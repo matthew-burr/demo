@@ -2,14 +2,19 @@
 package main
 
 import (
-	. "demo/click"
-	"fmt"
+	"demo/click"
+	"demo/parallel"
+
+	"github.com/alecthomas/kong"
 )
+
+var cli struct {
+	Click    click.Command    `cmd help:"Run the 'click' example to demonstrate core features."`
+	Parallel parallel.Command `cmd help:"Run the 'parallel' example to demonstrate parallelization features."`
+}
 
 // Let's see how this works
 func main() {
-	var c, d = new(Counter), new(Doubler) // new() creates a new instance of a structure and gives me a pointer to it
-	var m = MultiClicker(c, d)
-	DoClicks(m, 5)
-	fmt.Printf("Counter: %d\nDoubler: %d\n", c.Total(), d.Total())
+	var ctx = kong.Parse(&cli)
+	ctx.FatalIfErrorf(ctx.Run())
 }
